@@ -10,43 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_29_083451) do
+ActiveRecord::Schema.define(version: 2021_01_30_070100) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name", null: false
-    t.text "explanation", null: false
+    t.text "description", null: false
+    t.string "category", null: false
+    t.string "condition", null: false
+    t.string "shipping_charges", null: false
+    t.string "shipping_area", null: false
+    t.string "day_to_ship", null: false
     t.integer "price", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "record", null: false
-    t.string "buyer", null: false
+  create_table "purchase_managements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "who_bought_it", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_purchases_on_user_id"
+    t.index ["user_id"], name: "index_purchase_managements_on_user_id"
   end
 
-  create_table "shippings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "shipping_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "who_listed", null: false
     t.text "address", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_shippings_on_user_id"
+    t.index ["user_id"], name: "index_shipping_addresses_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", null: false
     t.string "encrypted_password", null: false
-    t.string "full_name", null: false
-    t.string "date_of_birth", null: false
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_Frigana", null: false
+    t.string "first_name_Frigana", null: false
+    t.date "date_of_birth", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "purchases", "users"
-  add_foreign_key "shippings", "users"
+  add_foreign_key "purchase_managements", "users"
+  add_foreign_key "shipping_addresses", "users"
 end

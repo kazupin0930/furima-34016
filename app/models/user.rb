@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
-  has_many :item
-  has_many :shipping
-  has_many :purchase
+  has_many :items
+  has_many :shipping_addresses
+  has_many :purchase_managements
   
 end
