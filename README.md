@@ -3,42 +3,40 @@
 
 ## users テーブル
 
-| Column                  | Type   | Options             |
-| --------                | ------ | --------            |
-| nickname                | string | NOT NULL            |
-| email                   | string | NOT NULL, NOT UNIQUE|
-| encrypted_password      | string | NOT NULL            |
-| last_name               | string | NOT NULL            |
-| first_name              | string | NOT NULL            |
-| last_name_frigana       | string | NOT NULL            |
-| last_name_frigana       | string | NOT NULL            |
-| date_of_birth           | date   | NOT NULL            |
+| Column             | Type       | Options                  |
+| ------             | ------     | --------                 |
+| nickname           | string     | null: false              |
+| email              | string     | null: false, unique: true|
+| encrypted_password | string     | null: false              |
+| last_name          | string     | null: false              |
+| first_name         | string     | null: false              |
+| last_name_frigana  | string     | null: false              |
+| last_name_frigana  | string     | null: false              |
+| date_of_birth      | date       | null: false              |
+| user               | references | foreign_key: true        |
 
 
 ### Association
 
-- has_many :items
 - has_many :purchase_managements
 
 
 ## items テーブル
 
-| Column              | Type       | Options  |
-| ------              | ------     | -------- |
-| name                | string     | NOT NULL |
-| description         | text       | NOT NULL |
-| category_id         | integer    | NOT NULL |
-| condition_id        | integer    | NOT NULL |
-| shipping_charges_id | integer    | NOT NULL |
-| shipping_area_id    | integer    | NOT NULL |
-| day_to_ship_id      | integer    | NOT NULL |
-| price               | integer    | NOT NULL |
-| who_bought_it       | string     | NOT NULL |
+| Column              | Type       | Options     |
+| ------              | ------     | --------    |
+| name                | string     | null: false |
+| description         | text       | null: false |
+| category_id         | integer    | null: false |
+| condition_id        | integer    | null: false |
+| shipping_charges_id | integer    | null: false |
+| shipping_area_id    | integer    | null: false |
+| day_to_ship_id      | integer    | null: false |
+| price               | integer    | null: false |
 
 
 ### Association
 
-- belongs_to :user
 - has_one    :purchase_management
 
 
@@ -60,19 +58,16 @@
 
 | Column         | Type       | Options           |
 | ------         | ---------- | --------          |
-| postal_code    | string     | NOT NULL          |
-| prefectures_id | integer    | NOT NULL          |
-| municipality   | text       | NOT NULL          |
-| address        | text       | NOT NULL          |
+| postal_code    | string     | null: false       |
+| prefectures_id | integer    | null: false       |
+| municipality   | text       | null: false       |
+| address        | text       | null: false       |
 | building_name  | text       | --------          |
-| phone_number   | string     | NOT NULL          |
-| who_listed     | string     | NOT NULL          |
+| phone_number   | string     | null: false       |
 | user           | references | foreign_key: true |
 
 
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
 - belongs_to :purchase_management

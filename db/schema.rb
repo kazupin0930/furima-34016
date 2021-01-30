@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
     t.integer "shipping_area_id", null: false
     t.integer "day_to_ship_id", null: false
     t.integer "price", null: false
-    t.string "who_bought_it", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -42,7 +41,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
     t.text "address", null: false
     t.text "building_name"
     t.string "phone_number", null: false
-    t.string "who_listed", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -58,11 +56,14 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
     t.string "last_name_frigana", null: false
     t.string "first_name_frigana", null: false
     t.date "date_of_birth", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_users_on_user_id"
   end
 
   add_foreign_key "purchase_managements", "items"
   add_foreign_key "purchase_managements", "users"
   add_foreign_key "shipping_addresses", "users"
+  add_foreign_key "users", "users"
 end
