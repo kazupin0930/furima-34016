@@ -15,18 +15,19 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name", null: false
     t.text "description", null: false
-    t.string "category", null: false
-    t.string "condition", null: false
-    t.string "shipping_charges", null: false
-    t.string "shipping_area", null: false
-    t.string "day_to_ship", null: false
+    t.integer "category_id", null: false
+    t.integer "condition_id", null: false
+    t.integer "shipping_charges_id", null: false
+    t.integer "shipping_area_id", null: false
+    t.integer "day_to_ship_id", null: false
     t.integer "price", null: false
+    t.string "who_bought_it", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "purchase_managements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "who_bought_it", null: false
+    t.string "name", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -34,8 +35,13 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
   end
 
   create_table "shipping_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "who_listed", null: false
+    t.integer "postal_code", null: false
+    t.integer "prefectures_id", null: false
+    t.text "municipality", null: false
     t.text "address", null: false
+    t.text "building_name"
+    t.integer "phone_number", null: false
+    t.string "who_listed", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

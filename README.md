@@ -3,16 +3,16 @@
 
 ## users テーブル
 
-| Column                  | Type   | Options  |
-| --------                | ------ | -------- |
-| nickname                | string | NOT NULL |
-| email                   | string | NOT NULL |
-| encrypted_password      | string | NOT NULL |
-| last_name               | string | NOT NULL |
-| first_name              | string | NOT NULL |
-| last_name_Frigana       | string | NOT NULL |
-| last_name_Frigana       | string | NOT NULL |
-| date_of_birth           | date   | NOT NULL |
+| Column                  | Type   | Options             |
+| --------                | ------ | --------            |
+| nickname                | string | NOT NULL            |
+| email                   | string | NOT NULL, NOT UNIQUE|
+| encrypted_password      | string | NOT NULL            |
+| last_name               | string | NOT NULL            |
+| first_name              | string | NOT NULL            |
+| last_name_Frigana       | string | NOT NULL            |
+| last_name_Frigana       | string | NOT NULL            |
+| date_of_birth           | date   | NOT NULL            |
 
 
 ### Association
@@ -24,16 +24,17 @@
 
 ## items テーブル
 
-| Column           | Type    | Options  |
-| ------           | ------  | -------- |
-| name             | string  | NOT NULL |
-| description      | text    | NOT NULL |
-| category         | string  | NOT NULL |
-| condition        | string  | NOT NULL |
-| shipping_charges | string  | NOT NULL |
-| shipping_area    | string  | NOT NULL |
-| day_to_ship      | string  | NOT NULL |
-| price            | integer | NOT NULL |
+| Column              | Type    | Options  |
+| ------              | ------  | -------- |
+| name                | string  | NOT NULL |
+| description         | text    | NOT NULL |
+| category_id         | integer | NOT NULL |
+| condition_id        | integer | NOT NULL |
+| shipping_charges_id | integer | NOT NULL |
+| shipping_area_id    | integer | NOT NULL |
+| day_to_ship_id      | integer | NOT NULL |
+| price               | integer | NOT NULL |
+| who_bought_it       | string  | NOT NULL |
 
 
 ### Association
@@ -45,29 +46,35 @@
 
 ## purchase_managements テーブル
 
-| Column        | Type       | Options  |
-| ------        | ---------- | -------- |
-| who_bought_it | string     | NOT NULL |
-| user          | references | -------- |
+| Column      | Type       | Options  |
+| ------      | ---------- | -------- |
+| name        | string     | NOT NULL |
+| user        | references | -------- |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :shipping
+- has_one    :shipping_address
 
 
 ## shipping_addresses テーブル
 
-| Column  | Type          | Options  |
-| ------  | ----------    | -------- |
-| who_listed | string     | NOT NULL |
-| address    | text       | NOT NULL |
-| user       | references | -------- |
+| Column         | Type       | Options  |
+| ------         | ---------- | -------- |
+| postal_code    | integer    | NOT NULL |
+| prefectures_id | integer    | NOT NULL |
+| municipality   | text       | NOT NULL |
+| address        | text       | NOT NULL |
+| building_name  | text       | -------- |
+| phone_number   | integer    | NOT NULL |
+| who_listed     | string     | NOT NULL |
+| user           | references | -------- |
+
 
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :purchase
+- belongs_to :purchase_management
