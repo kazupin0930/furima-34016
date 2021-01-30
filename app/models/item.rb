@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
 
   belongs_to :user
-  belongs_to :purchase_management
-  belongs_to :shipping_address
+  has_one    :purchase_management
 
 end
