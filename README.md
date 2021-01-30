@@ -10,15 +10,14 @@
 | encrypted_password      | string | NOT NULL            |
 | last_name               | string | NOT NULL            |
 | first_name              | string | NOT NULL            |
-| last_name_Frigana       | string | NOT NULL            |
-| last_name_Frigana       | string | NOT NULL            |
+| last_name_frigana       | string | NOT NULL            |
+| last_name_frigana       | string | NOT NULL            |
 | date_of_birth           | date   | NOT NULL            |
 
 
 ### Association
 
 - has_many :items
-- has_many :shipping_addresses
 - has_many :purchase_managements
 
 
@@ -41,15 +40,14 @@
 
 - belongs_to :user
 - belongs_to :purchase_management
-- belongs_to :shipping_address
 
 
 ## purchase_managements テーブル
 
-| Column      | Type       | Options  |
-| ------      | ---------- | -------- |
-| name        | string     | NOT NULL |
-| user        | references | -------- |
+| Column      | Type       | Options           |
+| ------      | ---------- | --------          |
+| item        | references | foreign_key: true |
+| user        | references | foreign_key: true |
 
 ### Association
 
@@ -60,16 +58,16 @@
 
 ## shipping_addresses テーブル
 
-| Column         | Type       | Options  |
-| ------         | ---------- | -------- |
-| postal_code    | integer    | NOT NULL |
-| prefectures_id | integer    | NOT NULL |
-| municipality   | text       | NOT NULL |
-| address        | text       | NOT NULL |
-| building_name  | text       | -------- |
-| phone_number   | integer    | NOT NULL |
-| who_listed     | string     | NOT NULL |
-| user           | references | -------- |
+| Column         | Type       | Options           |
+| ------         | ---------- | --------          |
+| postal_code    | integer    | NOT NULL          |
+| prefectures_id | integer    | NOT NULL          |
+| municipality   | text       | NOT NULL          |
+| address        | text       | NOT NULL          |
+| building_name  | text       | --------          |
+| phone_number   | string     | NOT NULL          |
+| who_listed     | string     | NOT NULL          |
+| user           | references | foreign_key: true |
 
 
 

@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
   end
 
   create_table "purchase_managements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
+    t.bigint "item_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_purchase_managements_on_item_id"
     t.index ["user_id"], name: "index_purchase_managements_on_user_id"
   end
 
@@ -40,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
     t.text "municipality", null: false
     t.text "address", null: false
     t.text "building_name"
-    t.integer "phone_number", null: false
+    t.string "phone_number", null: false
     t.string "who_listed", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -54,13 +55,14 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
     t.string "encrypted_password", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
-    t.string "last_name_Frigana", null: false
-    t.string "first_name_Frigana", null: false
+    t.string "last_name_frigana", null: false
+    t.string "first_name_frigana", null: false
     t.date "date_of_birth", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "purchase_managements", "items"
   add_foreign_key "purchase_managements", "users"
   add_foreign_key "shipping_addresses", "users"
 end

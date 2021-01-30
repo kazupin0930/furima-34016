@@ -6,8 +6,8 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string   :encrypted_password, null: false
       t.string   :last_name, null: false
       t.string   :first_name, null: false
-      t.string   :last_name_Frigana, null: false
-      t.string   :first_name_Frigana, null: false
+      t.string   :last_name_frigana, null: false
+      t.string   :first_name_frigana, null: false
       t.date     :date_of_birth, null: false
       t.timestamps
     end
