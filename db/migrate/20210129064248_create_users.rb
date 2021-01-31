@@ -9,7 +9,6 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string     :last_name_frigana, null: false
       t.string     :first_name_frigana, null: false
       t.date       :date_of_birth, null: false
-      t.references :user , foreign_key: true
       t.timestamps
     end
   end
