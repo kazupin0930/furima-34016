@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_01_30_070100) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "name", null: false
+    t.string "name", null: false
     t.text "description", null: false
     t.integer "category_id", null: false
     t.integer "condition_id", null: false
@@ -21,8 +21,10 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
     t.integer "shipping_area_id", null: false
     t.integer "day_to_ship_id", null: false
     t.integer "price", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "purchase_managements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -36,15 +38,15 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
 
   create_table "shipping_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "postal_code", null: false
-    t.integer "prefectures_id", null: false
-    t.text "municipality", null: false
-    t.text "address", null: false
-    t.text "building_name"
+    t.integer "shipping_area_id", null: false
+    t.string "municipality", null: false
+    t.string "address", null: false
+    t.string "building_name"
     t.string "phone_number", null: false
-    t.bigint "user_id"
+    t.bigint "item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_shipping_addresses_on_user_id"
+    t.index ["item_id"], name: "index_shipping_addresses_on_item_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -62,8 +64,9 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
     t.index ["user_id"], name: "index_users_on_user_id"
   end
 
+  add_foreign_key "items", "users"
   add_foreign_key "purchase_managements", "items"
   add_foreign_key "purchase_managements", "users"
-  add_foreign_key "shipping_addresses", "users"
+  add_foreign_key "shipping_addresses", "items"
   add_foreign_key "users", "users"
 end
