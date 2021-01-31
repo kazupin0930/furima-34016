@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_30_070100) do
+ActiveRecord::Schema.define(version: 2021_01_30_065825) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -30,11 +30,9 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
   create_table "purchase_managements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "item_id"
     t.bigint "user_id"
-    t.bigint "shipping_addresses_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_purchase_managements_on_item_id"
-    t.index ["shipping_addresses_id"], name: "index_purchase_managements_on_shipping_addresses_id"
     t.index ["user_id"], name: "index_purchase_managements_on_user_id"
   end
 
@@ -45,8 +43,10 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
     t.string "address", null: false
     t.string "building_name"
     t.string "phone_number", null: false
+    t.bigint "purchase_managements_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["purchase_managements_id"], name: "index_shipping_addresses_on_purchase_managements_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -64,6 +64,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_070100) do
 
   add_foreign_key "items", "users"
   add_foreign_key "purchase_managements", "items"
-  add_foreign_key "purchase_managements", "shipping_addresses", column: "shipping_addresses_id"
   add_foreign_key "purchase_managements", "users"
+  add_foreign_key "shipping_addresses", "purchase_managements", column: "purchase_managements_id"
 end
