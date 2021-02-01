@@ -11,7 +11,7 @@
 | last_name          | string     | null: false              |
 | first_name         | string     | null: false              |
 | last_name_frigana  | string     | null: false              |
-| last_name_frigana  | string     | null: false              |
+| first_name_frigana  | string     | null: false              |
 | date_of_birth      | date       | null: false              |
 
 
