@@ -71,6 +71,38 @@ RSpec.describe User, type: :model do
           @user.valid?
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
+
+        #本人情報確認
+        it "ユーザー本名は、名字と名前をそれぞれ含まない場合登録できないこと" do
+          @user.last_name = ""
+          @user.first_name = ""
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Last name can't be blank", "First name can't be blank")
+        end
+
+        it "ユーザー本名は、全角（漢字・ひらがな・カタカナ）の入力を含まない場合登録できないこと" do
+          
+        end
+
+        it "ユーザー本名のフリガナは、名字と名前をそれぞれ含まない場合登録できないこと" do
+          @user.last_name_frigana = ""
+          @user.first_name_frigana = ""
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Last name frigana can't be blank", "First name frigana can't be blank")
+        end
+
+        it "ユーザー本名のフリガナは、全角（カタカナ）での入力を含まない場合登録できないこと" do
+          
+        end
+
+        it "生年月日が入力されていない場合登録できないこと" do
+          @user.date_of_birth = ""
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Date of birth can't be blank")
+        end
+
+        #トップページ
+        
       end
     end
   end
