@@ -8,9 +8,15 @@ class User < ApplicationRecord
          has_many :purchase_managements
 
          validates :nickname, presence: true
-         validates :last_name, presence: true 
-         validates :first_name, presence: true 
-         validates :last_name_frigana, presence: true 
-         validates :first_name_frigana, presence: true 
-         validates :date_of_birth, presence: true 
+         VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
+         validates :password, format: { with: VALID_PASSWORD_REGEX }
+      with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ } do
+         validates :last_name, presence: true
+         validates :first_name, presence: true
+      end
+      with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/ } do
+         validates :last_name_frigana, presence: true
+         validates :first_name_frigana, presence: true
+      end 
+         validates :date_of_birth, presence: true
 end

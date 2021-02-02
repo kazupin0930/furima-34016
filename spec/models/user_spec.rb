@@ -54,8 +54,9 @@ RSpec.describe User, type: :model do
         end
 
         it "パスワードは、半角英数字混合を含まない場合登録できないこと" do
-          
-
+          @user.password ="aaa"
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is too short (minimum is 6 characters)")
         end
 
         it "パスワードは、確認用を含めて2回入力しない場合登録できないこと" do
@@ -81,7 +82,10 @@ RSpec.describe User, type: :model do
         end
 
         it "ユーザー本名は、全角（漢字・ひらがな・カタカナ）の入力を含まない場合登録できないこと" do
-          
+          @user.last_name = "aaaaaa"
+          @user.first_name = "aaaaaa"
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Last name is invalid", "First name is invalid")
         end
 
         it "ユーザー本名のフリガナは、名字と名前をそれぞれ含まない場合登録できないこと" do
@@ -92,7 +96,10 @@ RSpec.describe User, type: :model do
         end
 
         it "ユーザー本名のフリガナは、全角（カタカナ）での入力を含まない場合登録できないこと" do
-          
+          @user.last_name_frigana = "あああ"
+          @user.first_name_frigana = "あああ"
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Last name frigana is invalid", "First name frigana is invalid")
         end
 
         it "生年月日が入力されていない場合登録できないこと" do
@@ -100,9 +107,6 @@ RSpec.describe User, type: :model do
           @user.valid?
           expect(@user.errors.full_messages).to include("Date of birth can't be blank")
         end
-
-        #トップページ
-        
       end
     end
   end
