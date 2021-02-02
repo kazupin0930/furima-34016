@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   def index
     @items = Item.all
   end
@@ -11,12 +10,11 @@ class ItemsController < ApplicationController
   def create
     @user = User.new(item_params)
     if @user.save
-        redirect_to root_path
+      redirect_to root_path
     else
       render :new
-    end 
+    end
   end
-
 
   private
 
