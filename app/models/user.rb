@@ -8,9 +8,9 @@ class User < ApplicationRecord
   has_many :purchase_managements
 
   validates :nickname, presence: true
-  PASSWORD_REGEX =  /\A(?=.*?[a-z])[a-z\d]+\z/.freeze
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ } do
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/ } do
     validates :last_name, presence: true
     validates :first_name, presence: true
   end
