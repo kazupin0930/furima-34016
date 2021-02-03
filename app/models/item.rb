@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
-  belongs_to :user
-  has_one    :purchase_management
+  # belongs_to :user
+  # has_one    :purchase_management
 
   validates :name, presence: true
   validates :description, presence: true

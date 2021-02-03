@@ -7,17 +7,20 @@ class User < ApplicationRecord
   has_many :items
   has_many :purchase_managements
 
-  validates :nickname, presence: true
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  with_options presence: true, format: { with: /\A[a-zA-Zーぁ-んァ-ン一-龥々]+\z/ } do
+    validates :nickname
+  end
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX
   with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/ } do
-    validates :last_name, presence: true
-    validates :first_name, presence: true
+    validates :last_name
+    validates :first_name
   end
-
   with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/ } do
-    validates :last_name_frigana, presence: true
-    validates :first_name_frigana, presence: true
+    validates :last_name_frigana
+    validates :first_name_frigana
   end
-  validates :date_of_birth, presence: true
+  with_options presence: true, format: { with: /\A\d{4}-\d{2}-\d{2}\z/ } do
+    validates :date_of_birth
+  end
 end
