@@ -10,8 +10,8 @@ class User < ApplicationRecord
   with_options presence: true, format: { with: /\A[a-zA-Zーぁ-んァ-ン一-龥々]+\z/ } do
     validates :nickname
   end
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
-  validates_format_of :password, with: PASSWORD_REGEX
+  PASSWORD_REGEX = /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}\z/.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: "Include both letters and numbers"
   with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/ } do
     validates :last_name
     validates :first_name
