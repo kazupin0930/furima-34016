@@ -1,5 +1,8 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+
+  belongs_to :shipping_charge
+  belongs_to :condition
   belongs_to :category
   belongs_to :user
   has_one    :purchase_management
@@ -12,7 +15,7 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :category_id, presence: true
   validates :condition_id, presence: true
-  validates :shipping_charges_id, presence: true
+  validates :shipping_charge_id, presence: true
   validates :shipping_area_id, presence: true
   validates :day_to_ship_id, presence: true
   validates :price, presence: true
