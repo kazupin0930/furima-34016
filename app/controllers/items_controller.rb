@@ -4,6 +4,10 @@ class ItemsController < ApplicationController
      @items = Item.all
   end
 
+  def new
+    @item = Item.new
+  end
+
   def create
     @user = User.new(item_params)
     if @user.save
@@ -16,7 +20,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:nickname, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:nickname, :image, :category_id).merge(user_id: current_user.id)
   end
 
 end
