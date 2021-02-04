@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one    :purchase_management
+  has_one_attached :image
 
   validates :description, presence: true
   validates :category_id, presence: true

@@ -1,5 +1,22 @@
 class ItemsController < ApplicationController
+
   def index
-    # @items = Item.all
+     @items = Item.all
   end
+
+  def create
+    @user = User.new(item_params)
+    if @user.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:nickname, :image).merge(user_id: current_user.id)
+  end
+
 end
