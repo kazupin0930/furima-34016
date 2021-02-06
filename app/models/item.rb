@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  belongs_to :day_to_area
+  belongs_to :day_to_ship
   belongs_to :shipping_area
   belongs_to :shipping_charge
   belongs_to :condition
@@ -10,25 +10,23 @@ class Item < ApplicationRecord
   has_one    :purchase_management
   has_one_attached :image
 
-  validates :image, attached_file_number: { maximum: 1 }
-  validates :title, presence: true
+  validates :image, presence: true
+  
   validates :category_id, numericality: { other_than: 1 }
   validates :condition_id, numericality: { other_than: 1 } 
   validates :shipping_charge_id, numericality: { other_than: 1 } 
   validates :shipping_area_id, numericality: { other_than: 1 } 
   validates :day_to_ship_id, numericality: { other_than: 1 }
-
-
+  
+  validates :item_name, presence: true
   validates :description, presence: true
-  validates :category_id, presence: true
-  validates :condition_id, presence: true
-  validates :shipping_charge_id, presence: true
-  validates :shipping_area_id, presence: true
-  validates :day_to_ship_id, presence: true
-  with_options presence: true, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/ }
-    validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
+  with_options presence: true, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/ } do
+    validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  end
+  
   def was_attached?
     self.image.attached? 
   end
+  
 end
