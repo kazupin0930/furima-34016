@@ -11,15 +11,16 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
-    validates :image, presence: { message: "can't be blank" }
+    validates :image
     validates :item_name
     validates :description
-    validates :category_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
-    validates :condition_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
-    validates :shipping_charge_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
-    validates :shipping_area_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
-    validates :day_to_ship_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
   end
+
+  validates :category_id, numericality: { other_than: 1, message: 'Select' }
+  validates :condition_id, numericality: { other_than: 1, message: 'Select' }
+  validates :shipping_charge_id, numericality: { other_than: 1, message: 'Select' }
+  validates :shipping_area_id, numericality: { other_than: 1, message: 'Select' }
+  validates :day_to_ship_id, numericality: { other_than: 1, message: 'Select' }
 
   with_options presence: true, format: { with: /\A[0-9]+\z/ } do
     validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
