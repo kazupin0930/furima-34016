@@ -33,32 +33,32 @@ RSpec.describe Item, type: :model do
         end
 
         it 'カテゴリーの情報の値が1だと出品できないこと' do
-          @item.category_id = '1'
+          @item.category_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Category Select')
         end
 
         it '商品の状態についての情報の値が1だと出品できないこと' do
-          @item.condition_id = '1'
+          @item.condition_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Condition Select')
         end
 
         it '配送料の負担についての情報の値が1だと出品できないこと' do
-          @item.shipping_charge_id = '1'
+          @item.shipping_charge_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Shipping charge Select')
         end
 
         it '発送元の地域についての情報の値が1だと出品できないこと' do
-          @item.shipping_area_id = '1'
+          @item.shipping_area_id = 1
 
           @item.valid?
           expect(@item.errors.full_messages).to include('Shipping area Select')
         end
 
         it '発送までの日数についての情報の値が1だと出品できないこと' do
-          @item.day_to_ship_id = '1'
+          @item.day_to_ship_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include('Day to ship Select')
         end
@@ -70,13 +70,13 @@ RSpec.describe Item, type: :model do
         end
 
         it '販売価格が¥300より少ない時は出品できないこと' do
-          @item.price = '299'
+          @item.price = 299
           @item.valid?
           expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
         end
 
         it '販売価格がが¥9999999より多い時は出品できないこと' do
-          @item.price = '10000000000'
+          @item.price = 10_000_000_000
           @item.valid?
           expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
         end
