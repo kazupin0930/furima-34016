@@ -34,8 +34,7 @@
 | day_to_ship_id      | integer    | null: false      |
 | price               | integer    | null: false      |
 | user                | references | foreign_key: true|
-| seller_id           | integer    | null: false      |
-| buyer_id            | integer    | null: false      |
+
 
 ### Association
 
