@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  #has_many :items
-  #has_many :purchase_managements
+  has_many :items
+  has_many :purchase_managements
 
   with_options presence: true, format: { with: /\A[a-zA-Zーぁ-んァ-ン一-龥々]+\z/, message: "can't be blank" } do
     validates :nickname

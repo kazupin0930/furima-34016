@@ -25,15 +25,15 @@
 
 | Column              | Type       | Options          |
 | ------              | ------     | --------         |
-| name                | string     | null: false      |
+| item_name           | string     | null: false      |
 | description         | text       | null: false      |
 | category_id         | integer    | null: false      |
 | condition_id        | integer    | null: false      |
-| shipping_charges_id | integer    | null: false      |
+| shipping_charge_id  | integer    | null: false      |
 | shipping_area_id    | integer    | null: false      |
 | day_to_ship_id      | integer    | null: false      |
 | price               | integer    | null: false      |
-| user                | references | foreign_key: true |
+| user                | references | foreign_key: true|
 
 
 ### Association
