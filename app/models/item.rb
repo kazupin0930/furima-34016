@@ -16,11 +16,13 @@ class Item < ApplicationRecord
     validates :description
   end
 
-  validates :category_id, numericality: { other_than: 1, message: 'Select' }
-  validates :condition_id, numericality: { other_than: 1, message: 'Select' }
-  validates :shipping_charge_id, numericality: { other_than: 1, message: 'Select' }
-  validates :shipping_area_id, numericality: { other_than: 1, message: 'Select' }
-  validates :day_to_ship_id, numericality: { other_than: 1, message: 'Select' }
+  with_options numericality: { other_than: 1 } do
+    validates :category_id, numericality: { message: 'Select' }
+    validates :condition_id, numericality:  { message: 'Select' }
+    validates :shipping_charge_id, numericality: { message: 'Select' }
+    validates :shipping_area_id, numericality: { message: 'Select' }
+    validates :day_to_ship_id, numericality: { message: 'Select' }
+  end
 
   with_options presence: true, format: { with: /\A[0-9]+\z/ } do
     validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
