@@ -10,23 +10,23 @@ class Item < ApplicationRecord
   has_one    :purchase_management
   has_one_attached :image
 
-  validates :image, presence: true
-  
-  validates :category_id, numericality: { other_than: 1 }
-  validates :condition_id, numericality: { other_than: 1 } 
-  validates :shipping_charge_id, numericality: { other_than: 1 } 
-  validates :shipping_area_id, numericality: { other_than: 1 } 
-  validates :day_to_ship_id, numericality: { other_than: 1 }
-  
-  validates :item_name, presence: true
-  validates :description, presence: true
+  with_options presence: true do
+    validates :image, presence: { message: "can't be blank" }
+    validates :item_name
+    validates :description
+    validates :category_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
+    validates :condition_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
+    validates :shipping_charge_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
+    validates :shipping_area_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
+    validates :day_to_ship_id, numericality: { other_than: 1 }, presence: { message: 'Select' }
+  end
 
-  with_options presence: true, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/ } do
-    validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  with_options presence: true, format: { with: /\A[0-9]+\z/ } do
+    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
+                      presence: { message: "can't be blank" }
   end
-  
+
   def was_attached?
-    self.image.attached? 
+    image.attached?
   end
-  
 end

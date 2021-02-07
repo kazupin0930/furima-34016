@@ -1,3 +1,2 @@
 class ItemPurchase < ApplicationRecord
-  
 end

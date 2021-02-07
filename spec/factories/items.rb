@@ -10,10 +10,9 @@ FactoryBot.define do
     price { 2222 }
     seller_id { 2 }
     buyer_id { 2 }
-    
+
     association :user
 
-    
     after(:build) do |item|
       item.image.attach(io: File.open('spec/fixtures/images/pokemon.png'), filename: 'pokemon.png')
     end
