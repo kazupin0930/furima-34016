@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :purchase_managements
+  has_many :order
 
   with_options presence: true, format: { with: /\A[a-zA-Zーぁ-んァ-ン一-龥々]+\z/, message: "can't be blank" } do
     validates :nickname
