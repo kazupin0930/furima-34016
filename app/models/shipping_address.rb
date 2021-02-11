@@ -1,12 +1,17 @@
 class ShippingAddress < ApplicationRecord
-   belongs_to :user
-   belongs_to :item
-   belongs_to :purchase_management
 
-   validates :postal_code, presence: true
-   validates :shipping_area_id, presence: true
-   validates :municipality, presence: true
-   validates :address, presence: true
-   validates :building_name
-   alidates :phone_number, presence: true
+  belongs_to :user
+  belongs_to :item
+  belongs_to :purchase_management
+
+  include ActiveModel: :Model
+  attr_accessor :postal_code, :shipping_area_id, :municipality, :address, :building_name, :phone_number, :purchase_management_id
+
+  with_options presence: true do
+    validates :postal_code
+    validates :shipping_area_id
+    validates :municipality
+    validates :address
+    alidates :phone_number
+  end
 end
