@@ -1,6 +1,6 @@
 class PurchaseManagementShippingAddress
 
-  include ActiveModel: :Model
+  include ActiveModel::Model
   attr_accessor :postal_code, :shipping_area_id, :municipality, :address, :building_name, :phone_number, :purchase_management_id, :item_id, :user_id
 
   with_options presence: true do
@@ -8,6 +8,8 @@ class PurchaseManagementShippingAddress
     validates :municipality, presence: { message: "can't be blank" }
     validates :address, presence: { message: "can't be blank" }
     validates :phone_number, format: { with: /\A\d{11}\z/, message: "can't be blank. Input only number" }
+    validates :user_id
+    validates :item_id
   end
   validates :shipping_area_id, numericality: { other_than: 1, message: 'Select' }
 

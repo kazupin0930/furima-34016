@@ -3,24 +3,23 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
-    @order = Order.new
+    @order = PurchaseManagementShippingAddress.new
   end
 
   def create
-
-    @purchase_management_shipping_address = PurchaseManagementShippingAddress.new(purchase_management_params)
-    if @purchase_management_shipping_address.valid?
-      @purchase_management_shipping_address.save
+  
+    @order = PurchaseManagementShippingAddress.new(order_params[:id])
+    if @order.valid?
+      @order.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 
   private
 
-  def purchase_management_params
-
+  def order_params
     params.require(:purchase_management_shipping_address).permit(:postal_code, :shipping_area_id, :municipality, :address, :building_name, :phone_number, :purchase_management_id).merge(user_id: current_user.id)
   end
 
