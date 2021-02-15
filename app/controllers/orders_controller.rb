@@ -7,8 +7,8 @@ class OrdersController < ApplicationController
   end
 
   def create
-  
-    @order = PurchaseManagementShippingAddress.new(order_params[:id])
+   
+    @order = PurchaseManagementShippingAddress.new(order_params)
     if @order.valid?
       @order.save
       redirect_to root_path
@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:purchase_management_shipping_address).permit(:postal_code, :shipping_area_id, :municipality, :address, :building_name, :phone_number, :purchase_management_id).merge(user_id: current_user.id)
+    params.require(:purchase_management_shipping_address).permit(:postal_code, :shipping_area_id, :municipality, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
   def set_item
