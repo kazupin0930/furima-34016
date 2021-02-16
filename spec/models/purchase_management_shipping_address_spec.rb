@@ -68,6 +68,12 @@ RSpec.describe PurchaseManagementShippingAddress, type: :model do
           expect(@order.errors.full_messages).to include('Phone number Input only number')
         end
 
+        it '電話番号が12桁以上の数値の場合は保存できない' do
+          @order.phone_number = '09012345678912345'
+          @order.valid?
+          expect(@order.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+        end
+
         it 'tokenが空では登録できないこと' do
           @order.token = nil
           @order.valid?

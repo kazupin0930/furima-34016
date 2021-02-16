@@ -7,7 +7,8 @@ class PurchaseManagementShippingAddress
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'Input correctly' }
     validates :municipality, presence: { message: "can't be blank" }
     validates :address, presence: { message: "can't be blank" }
-    validates :phone_number, format: { with: /\A\d{11}\z/, message: 'Input only number' }
+    validates :phone_number, format: { with: /\A\d{11}\z/, message: 'is too long (maximum is 11 characters)' }
+    validates :phone_number, format: { with: /\A[0-9]+\z/, message: 'Input only number' }
     validates :user_id
     validates :item_id
     validates :token
