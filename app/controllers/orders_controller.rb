@@ -4,8 +4,8 @@ class OrdersController < ApplicationController
   before_action :move_to_index, only: [:index]
 
   def index
-    @order = PurchaseManagementShippingAddress.new
     redirect_to root_path if current_user.id == @item.user_id
+    @order = PurchaseManagementShippingAddress.new
   end
 
   def create
@@ -32,8 +32,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = '' # 秘密鍵
-
+    Payjp.api_key = 'ENV["PAYJP_SECRET_KEY"]' # 秘密鍵
     Payjp::Charge.create(
       amount: set_item[:price],
       card: order_params[:token],
