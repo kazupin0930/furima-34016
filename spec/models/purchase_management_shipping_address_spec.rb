@@ -33,7 +33,7 @@ RSpec.describe PurchaseManagementShippingAddress, type: :model do
         end
 
         it '配送先の情報として、都道府県の値が1だと購入できないこと' do
-          @order.shipping_area_id = '1'
+          @order.shipping_area_id = 1
           @order.valid?
           expect(@order.errors.full_messages).to include('Shipping area Select')
         end
