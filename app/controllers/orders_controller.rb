@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
-    redirect_to root_path if @item.purchase_management.blank? || current_user.id == @item.user_id
+    redirect_to root_path if @item.purchase_management.present? || current_user.id == @item.user_id
     @order = PurchaseManagementShippingAddress.new
   end
 
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = 'ENV["PAYJP_SECRET_KEY"]' # 秘密鍵
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 秘密鍵
     Payjp::Charge.create(
       amount: set_item[:price],
       card: order_params[:token],
